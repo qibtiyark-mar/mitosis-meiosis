@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LKPD Online Biologi XII - Siklus Sel & Kesehatan</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white !important; font-size: 11pt; }
+            .shadow-lg, .shadow-md { box-shadow: none !important; }
+            .border-slate-300 { border-color: #cbd5e1 !important; }
+            textarea, input { border: 1px solid #94a3b8 !important; background: transparent !important; }
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 font-sans min-h-screen pb-12">
+
+    <!-- Sticky Navigation & Progress Bar -->
+    <div class="sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm no-print">
+        <div class="max-w-5xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center space-x-3">
+                <i class="fa-solid fa-[#0284c7] fa-dna text-2xl text-sky-600"></i>
+                <span class="font-bold text-slate-700 text-lg">LKPD Online: Pembelahan Sel</span>
+            </div>
+            <div class="flex items-center space-x-4">
+                <div class="text-xs font-semibold text-slate-500">
+                    Progress: <span id="progress-text" class="text-sky-600 font-bold">0%</span>
+                </div>
+                <div class="w-32 bg-slate-200 rounded-full h-2.5 overflow-hidden">
+                    <div id="progress-bar" class="bg-sky-600 h-2.5 rounded-full transition-all duration-300" style="width: 0%"></div>
+                </div>
+                <button onclick="window.print()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1.5 rounded-lg text-sm font-medium transition flex items-center gap-1.5 shadow-sm">
+                    <i class="fa-solid fa-print"></i> Cetak / Simpan PDF
+                </button>
+                <button onclick="resetForm()" class="bg-rose-100 hover:bg-rose-200 text-rose-700 px-3 py-1.5 rounded-lg text-sm font-medium transition flex items-center gap-1">
+                    <i class="fa-solid fa-rotate-right"></i> Reset
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="max-w-4xl mx-auto px-4 mt-6">
+
+        <!-- Header -->
+        <header class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 mb-6 border-t-4 border-t-sky-600">
+            <div class="text-center pb-4 border-b border-slate-200 mb-6">
+                <h1 class="text-2xl font-extrabold text-slate-800 uppercase tracking-wide">Lembar Kerja Peserta Didik (LKPD) Terbimbing</h1>
+                <p class="text-sky-700 font-medium text-sm mt-1">Siklus Sel, Mitosis, Meiosis, dan Implikasinya dalam Dunia Kesehatan</p>
+                <p class="text-xs text-slate-500">Mata Pelajaran: Biologi | Kelas XII (Fase F)</p>
+            </div>
+
+            <!-- Form Identitas -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Nama Anggota Kelompok</label>
+                    <textarea id="identitas-nama" rows="3" class="w-full p-2.5 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-sky-500 focus:outline-none auto-save" placeholder="1. Nama (Absen)&#10;2. Nama (Absen)&#10;3. Nama (Absen)"></textarea>
+                </div>
+                <div class="grid grid-cols-1 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Kelas / Kelompok</label>
+                        <input type="text" id="identitas-kelas" class="w-full p-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-sky-500 focus:outline-none auto-save" placeholder="Contoh: XII IPA 1 / Kelompok 3">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Tanggal Pengerjaan</label>
+                        <input type="date" id="identitas-tanggal" class="w-full p-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-sky-500 focus:outline-none auto-save">
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- KEGIATAN 1 -->
+        <section class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 mb-6">
+            <h2 class="text-lg font-bold text-sky-700 flex items-center gap-2 border-b border-slate-200 pb-2 mb-4">
+                <span class="bg-sky-100 text-sky-700 w-7 h-7 rounded-full inline-flex items-center justify-center text-sm">1</span>
+                Kegiatan 1: Siklus Sel & Pembelahan Mitosis
+            </h2>
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 text-sm mb-4">
+                <p class="font-semibold text-slate-700 mb-1">Stimulus:</p>
+                <p class="text-slate-600 leading-relaxed">Setiap detik, jutaan sel tubuh manusia mengalami kerusakan dan harus digantikan oleh sel baru. Pembelahan mitosis bertujuan untuk pertumbuhan, regenerasi jaringan, dan mempertahankan jumlah kromosom diploid (2n). Sebelum sel membelah, sel melalui fase persiapan yang disebut Interfase.</p>
+            </div>
+
+            <!-- Q1 Table -->
+            <div class="mb-5">
+                <label class="block text-sm font-semibold text-slate-800 mb-2">1. Lengkapi tabel aktivitas sel pada fase Interfase beserta risikonya jika terjadi kesalahan:</label>
+                <div class="overflow-x-auto">
+                    <table class="w-full border-collapse border border-slate-300 text-sm">
+                        <thead class="bg-sky-50">
+                            <tr>
+                                <th class="border border-slate-300 p-2 text-left w-1/4">Fase Interfase</th>
+                                <th class="border border-slate-300 p-2 text-left">Aktivitas Utama Sel</th>
+                                <th class="border border-slate-300 p-2 text-left">Risiko Jika Terjadi Kesalahan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="border border-slate-300 p-2 font-medium bg-slate-50">G1 (Gap 1)</td>
+                                <td class="border border-slate-300 p-1"><textarea id="k1-g1-akt" rows="2" class="w-full p-1.5 text-xs border rounded auto-save"></textarea></td>
+                                <td class="border border-slate-300 p-1"><textarea id="k1-g1-ris" rows="2" class="w-full p-1.5 text-xs border rounded auto-save"></textarea></td>
+                            </tr>
+                            <tr>
+                                <td class="border border-slate-300 p-2 font-medium bg-slate-50">S (Sintesis)</td>
+                                <td class="border border-slate-300 p-1"><textarea id="k1-s-akt" rows="2" class="w-full p-1.5 text-xs border rounded auto-save"></textarea></td>
+                                <td class="border border-slate-300 p-1"><textarea id="k1-s-ris" rows="2" class="w-full p-1.5 text-xs border rounded auto-save"></textarea></td>
+                            </tr>
+                            <tr>
+                                <td class="border border-slate-300 p-2 font-medium bg-slate-50">G2 (Gap 2)</td>
+                                <td class="border border-slate-300 p-1"><textarea id="k1-g2-akt" rows="2" class="w-full p-1.5 text-xs border rounded auto-save"></textarea></td>
+                                <td class="border border-slate-300 p-1"><textarea id="k1-g2-ris" rows="2" class="w-full p-1.5 text-xs border rounded auto-save"></textarea></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q2 Essay -->
+            <div>
+                <label class="block text-sm font-semibold text-slate-800 mb-2">2. Tuliskan ciri khas utama dari 4 tahapan Mitosis (Profase, Metafase, Anafase, Telofase):</label>
+                <textarea id="k1-mitosis-tahap" rows="4" class="w-full p-3 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-sky-500 focus:outline-none auto-save" placeholder="- Profase: ...&#10;- Metafase: ...&#10;- Anafase: ...&#10;- Telofase & Sitokinesis: ..."></textarea>
+            </div>
+        </section>
+
+        <!-- KEGIATAN 2 -->
+        <section class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 mb-6">
+            <h2 class="text-lg font-bold text-sky-700 flex items-center gap-2 border-b border-slate-200 pb-2 mb-4">
+                <span class="bg-sky-100 text-sky-700 w-7 h-7 rounded-full inline-flex items-center justify-center text-sm">2</span>
+                Kegiatan 2: Pembelahan Meiosis & Variasi Genetik
+            </h2>
+
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-semibold text-slate-800 mb-1">1. Mengapa reduksi jumlah kromosom (2n &rarr; n) pada meiosis krusial bagi kelangsungan spesies? Apa dampaknya jika fertilisasi dari gamet mitosis?</label>
+                    <textarea id="k2-q1" rows="3" class="w-full p-3 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-sky-500 focus:outline-none auto-save" placeholder="Tuliskan jawaban Anda di sini..."></textarea>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-800 mb-1">2. Jelaskan mekanisme peristiwa pindah silang (crossing over) pada Profase I dan dampaknya terhadap variasi genetik!</label>
+                    <textarea id="k2-q2" rows="3" class="w-full p-3 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-sky-500 focus:outline-none auto-save" placeholder="Tuliskan jawaban Anda di sini..."></textarea>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-800 mb-2">3. Lengkapi tabel perbandingan Mitosis dan Meiosis berikut:</label>
+                    <div class="overflow-x-auto">
+                        <table class="w-full border-collapse border border-slate-300 text-sm">
+                            <thead class="bg-sky-50">
+                                <tr>
+                                    <th class="border border-slate-300 p-2 text-left">Parameter</th>
+                                    <th class="border border-slate-300 p-2 text-left">Mitosis</th>
+                                    <th class="border border-slate-300 p-2 text-left">Meiosis</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="border border-slate-300 p-2 font-medium bg-slate-50">Lokasi Terjadi</td>
+                                    <td class="border border-slate-300 p-1"><input id="k2-t-lok-mit" type="text" class="w-full p-1.5 text-xs border rounded auto-save"></td>
+                                    <td class="border border-slate-300 p-1"><input id="k2-t-lok-mei" type="text" class="w-full p-1.5 text-xs border rounded auto-save"></td>
+                                </tr>
+                                <tr>
+                                    <td class="border border-slate-300 p-2 font-medium bg-slate-50">Jumlah Pembelahan</td>
+                                    <td class="border border-slate-300 p-1"><input id="k2-t-jml-mit" type="text" class="w-full p-1.5 text-xs border rounded auto-save"></td>
+                                    <td class="border border-slate-300 p-1"><input id="k2-t-jml-mei" type="text" class="w-full p-1.5 text-xs border rounded auto-save"></td>
+                                </tr>
+                                <tr>
+                                    <td class="border border-slate-300 p-2 font-medium bg-slate-50">Jumlah & Sifat Sel Anak</td>
+                                    <td class="border border-slate-300 p-1"><input id="k2-t-sif-mit" type="text" class="w-full p-1.5 text-xs border rounded auto-save"></td>
+                                    <td class="border border-slate-300 p-1"><input id="k2-t-sif-mei" type="text" class="w-full p-1.5 text-xs border rounded auto-save"></td>
+                                </tr>
+                                <tr>
+                                    <td class="border border-slate-300 p-2 font-medium bg-slate-50">Fungsi Utama</td>
+                                    <td class="border border-slate-300 p-1"><input id="k2-t-fsi-mit" type="text" class="w-full p-1.5 text-xs border rounded auto-save"></td>
+                                    <td class="border border-slate-300 p-1"><input id="k2-t-fsi-mei" type="text" class="w-full p-1.5 text-xs border rounded auto-save"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- KEGIATAN 3 -->
+        <section class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 mb-6">
+            <h2 class="text-lg font-bold text-sky-700 flex items-center gap-2 border-b border-slate-200 pb-2 mb-4">
+                <span class="bg-sky-100 text-sky-700 w-7 h-7 rounded-full inline-flex items-center justify-center text-sm">3</span>
+                Kegiatan 3: Integrasi Aspek Kesehatan dan Kedokteran
+            </h2>
+
+            <!-- Studi Kasus 1 -->
+            <div class="mb-6">
+                <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-xl text-sm mb-3">
+                    <span class="font-bold text-amber-800">Kasus 1: Kanker dan Regulasi Siklus Sel</span>
+                    <p class="text-slate-700 mt-1 leading-relaxed">Seorang pasien didiagnosis kanker payudara. Dokter menjelaskan bahwa sel kankernya membelah tanpa kontrol dan menghindari kematian sel terprogram (apoptosis). Obat kemoterapi Paclitaxel digunakan untuk mengikat mikrotubulus dan mencegah pembongkaran benang spindel.</p>
+                </div>
+                <div class="space-y-3">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-800 mb-1">a. Apa fungsi gen penganulir tumor seperti p53 pada titik pemeriksaan (checkpoint) siklus sel?</label>
+                        <textarea id="k3-k1-qa" rows="2" class="w-full p-2.5 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-sky-500 focus:outline-none auto-save"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-800 mb-1">b. Apa dampak jika gen p53 mengalami mutasi terhadap mekanisme pembentukan kanker?</label>
+                        <textarea id="k3-k1-qb" rows="2" class="w-full p-2.5 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-sky-500 focus:outline-none auto-save"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-800 mb-1">c. Pada tahapan mana obat Paclitaxel menghentikan mitosis sel kanker? Mengapa rambut pasien kemoterapi rontok?</label>
+                        <textarea id="k3-k1-qc" rows="2.5" class="w-full p-2.5 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-sky-500 focus:outline-none auto-save"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Studi Kasus 2 -->
+            <div>
+                <div class="bg-purple-50 border-l-4 border-purple-500 p-4 rounded-r-xl text-sm mb-3">
+                    <span class="font-bold text-purple-800">Kasus 2: Nondisjunction dan Kelainan Genetik</span>
+                    <p class="text-slate-700 mt-1 leading-relaxed">Seorang bayi terlahir dengan Down Syndrome (karyotype 47, XX, +21 atau 47, XY, +21). Kelainan kromosom numerik ini disebabkan oleh gangguan pembelahan saat pembentukan gamet orang tua.</p>
+                </div>
+                <div class="space-y-3">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-800 mb-1">a. Jelaskan peristiwa gagal berpisah (nondisjunction) dan pada fase meiosis mana hal ini dapat terjadi!</label>
+                        <textarea id="k3-k2-qa" rows="2" class="w-full p-2.5 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-sky-500 focus:outline-none auto-save"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-800 mb-2">b. Lengkapi tabel kelainan kromosom berikut:</label>
+                        <div class="overflow-x-auto">
+                            <table class="w-full border-collapse border border-slate-300 text-sm">
+                                <thead class="bg-sky-50">
+                                    <tr>
+                                        <th class="border border-slate-300 p-2 text-left">Kelainan</th>
+                                        <th class="border border-slate-300 p-2 text-left">Rumus Kromosom</th>
+                                        <th class="border border-slate-300 p-2 text-left">Perubahan Kromosom & Gejala</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="border border-slate-300 p-2 font-medium bg-slate-50">Sindrom Down</td>
+                                        <td class="border border-slate-300 p-1"><input id="k3-sd-rumus" type="text" value="47, XX/XY, +21" readonly class="w-full p-1 text-xs bg-slate-100 border rounded"></td>
+                                        <td class="border border-slate-300 p-1"><textarea id="k3-sd-gejala" rows="1.5" class="w-full p-1 text-xs border rounded auto-save"></textarea></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border border-slate-300 p-2 font-medium bg-slate-50">Sindrom Turner</td>
+                                        <td class="border border-slate-300 p-1"><input id="k3-st-rumus" type="text" class="w-full p-1 text-xs border rounded auto-save" placeholder="Misal: 45, X0"></td>
+                                        <td class="border border-slate-300 p-1"><textarea id="k3-st-gejala" rows="1.5" class="w-full p-1 text-xs border rounded auto-save"></textarea></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border border-slate-300 p-2 font-medium bg-slate-50">Sindrom Klinefelter</td>
+                                        <td class="border border-slate-300 p-1"><input id="k3-sk-rumus" type="text" value="47, XXY" readonly class="w-full p-1 text-xs bg-slate-100 border rounded"></td>
+                                        <td class="border border-slate-300 p-1"><textarea id="k3-sk-gejala" rows="1.5" class="w-full p-1 text-xs border rounded auto-save"></textarea></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- KEGIATAN 4 & REFLEKSI -->
+        <section class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 mb-6">
+            <h2 class="text-lg font-bold text-sky-700 flex items-center gap-2 border-b border-slate-200 pb-2 mb-4">
+                <span class="bg-sky-100 text-sky-700 w-7 h-7 rounded-full inline-flex items-center justify-center text-sm">4</span>
+                Aplikasi Kedokteran & Refleksi Mandiri
+            </h2>
+
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-semibold text-slate-800 mb-2">1. Jelaskan mekanisme pembelahan sel dalam aplikasi teknologi medis berikut:</label>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                        <div class="border border-slate-200 p-3 rounded-xl bg-slate-50">
+                            <span class="font-bold text-xs text-sky-800 uppercase block mb-1">Bayi Tabung (IVF)</span>
+                            <textarea id="k4-ivf" rows="3" class="w-full p-2 text-xs border rounded auto-save" placeholder="Mekanisme sel & manfaat..."></textarea>
+                        </div>
+                        <div class="border border-slate-200 p-3 rounded-xl bg-slate-50">
+                            <span class="font-bold text-xs text-sky-800 uppercase block mb-1">Skrining PGD</span>
+                            <textarea id="k4-pgd" rows="3" class="w-full p-2 text-xs border rounded auto-save" placeholder="Mekanisme sel & manfaat..."></textarea>
+                        </div>
+                        <div class="border border-slate-200 p-3 rounded-xl bg-slate-50">
+                            <span class="font-bold text-xs text-sky-800 uppercase block mb-1">Radioterapi</span>
+                            <textarea id="k4-radio" rows="3" class="w-full p-2 text-xs border rounded auto-save" placeholder="Mekanisme sel & manfaat..."></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-slate-800 mb-1">2. Refleksi: Tuliskan kesimpulan utama dari pemahaman siklus sel bagi kesehatan!</label>
+                    <textarea id="refleksi-akhir" rows="3" class="w-full p-3 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-sky-500 focus:outline-none auto-save" placeholder="Tuliskan rangkuman refleksi Anda..."></textarea>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer Action -->
+        <div class="text-center py-4 no-print">
+            <button onclick="window.print()" class="bg-sky-600 hover:bg-sky-700 text-white font-bold py-3 px-8 rounded-xl shadow-lg hover:shadow-sky-200 transition text-base">
+                <i class="fa-solid fa-paper-plane mr-2"></i> Selesai & Cetak / Simpan PDF
+            </button>
+        </div>
+    </div>
+
+    <!-- Script for Autosave & Progress Tracker -->
+    <script>
+        const STORAGE_KEY = 'LKPD_BIOLOGI_XII_SAVED_DATA';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadSavedData();
+            updateProgress();
+
+            // Add event listeners to all auto-save fields
+            document.querySelectorAll('.auto-save').forEach(input => {
+                input.addEventListener('input', () => {
+                    saveData();
+                    updateProgress();
+                });
+            });
+        });
+
+        function saveData() {
+            const data = {};
+            document.querySelectorAll('.auto-save').forEach(input => {
+                data[input.id] = input.value;
+            });
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        }
+
+        function loadSavedData() {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (!saved) return;
+            try {
+                const data = JSON.parse(saved);
+                Object.keys(data).forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) el.value = data[id];
+                });
+            } catch (e) {
+                console.error("Gagal memuat data tersimpan:", e);
+            }
+        }
+
+        function updateProgress() {
+            const fields = document.querySelectorAll('.auto-save');
+            let filled = 0;
+            fields.forEach(input => {
+                if (input.value.trim() !== '') filled++;
+            });
+            const percent = Math.round((filled / fields.length) * 100);
+            document.getElementById('progress-bar').style.width = `${percent}%`;
+            document.getElementById('progress-text').innerText = `${percent}%`;
+        }
+
+        function resetForm() {
+            if (confirm("Apakah Anda yakin ingin mengosongkan semua jawaban yang telah diisi?")) {
+                localStorage.removeItem(STORAGE_KEY);
+                document.querySelectorAll('.auto-save').forEach(input => input.value = '');
+                updateProgress();
+            }
+        }
+    </script>
+</body>
+</html>
